@@ -29,6 +29,21 @@ namespace CalculatorTestProject
         }
 
         [TestMethod]
+        public void Subtract_CallsDiagnosticsWithExpectedResult()
+        {
+            // Arrange
+            var expectedResult = "-1";
+            var mockDiagnostics = new Mock<IDiagnostics>();
+            var calculator = new SimpleCalculator(mockDiagnostics.Object);
+
+            // Act
+            calculator.Subtract(1, 2);
+
+            // Assert
+            mockDiagnostics.Verify(x => x.LogResult(expectedResult), Times.Once);
+        }
+
+        [TestMethod]
         public void Add_Should_Return_Correct_Result()
         {
             // Arrange
